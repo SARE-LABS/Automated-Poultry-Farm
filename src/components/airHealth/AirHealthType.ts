@@ -12,3 +12,8 @@ export interface CalibrationRange {
   low: number;
   high: number;
 }
+
+export interface ParameterCardProp {
+    name: string;
+    currentReading: number;
+}
