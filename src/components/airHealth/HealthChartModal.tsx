@@ -1,4 +1,3 @@
-
 "use client";
 
 // HealthChartModal.tsx
@@ -30,12 +29,13 @@ export const HealthChartModal = () => {
     ];
 
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" >
         <AreaChart
           width={900}
           height={350}
           data={data}
           margin={{ top: 10, right: 20, left: 10, bottom: 10 }}
+          className=''
         >
           {/* Gradient fill for area chart */}
           <defs>

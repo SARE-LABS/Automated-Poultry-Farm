@@ -23,7 +23,7 @@ export const AirHealthChart = () => {
   // TODO: Integrate dynamic air health score and percentage change from live data
   // For now, values are hardcoded for UI demonstration
   return (
-    <div className="w-[900px] rounded-[10px] md:w-[95%] h-[400px] border-2  flex flex-col mt-3 ml-4 pt-4 border-[#0FC99F45]">
+    <div className="w-[900px] rounded-[10px] md:w-[95%] h-[400px] border-1  flex flex-col mt-3 ml-4 pt-4 border-[#0FC99F]/27 outline-none">
       {/* Header section: Air Health Score and trend */}
       <div className="flex flex-col gap-2 px-4 mb-4">
         <span className="text-[#000000B3] text-[18px] font-normal">Air Health Score</span>
@@ -41,7 +41,7 @@ export const AirHealthChart = () => {
         </div>
       </div>
       {/* Chart section: Weekly/daily air health trends */}
-      <div className="flex-1 h-[350px]">
+      <div className="flex-1 h-[350px] ">
         {/* HealthChartModal renders a Recharts area chart for air health trends */}
         <HealthChartModal />
       </div>

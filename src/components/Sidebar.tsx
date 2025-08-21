@@ -1,92 +1,68 @@
-'use client'
-import React from "react"
-import Image from "next/image"
+import Image from "next/image";
+import { bottomItems, navigationItems } from "../../public/assets";
 
-const navigationItems = [
-  { icon: `<svg width="18" height="19" viewBox="0 0 18 19" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 3.5C0.75 2.90326 0.987053 2.33097 1.40901 1.90901C1.83097 1.48705 2.40326 1.25 3 1.25H5.25C5.84674 1.25 6.41903 1.48705 6.84099 1.90901C7.26295 2.33097 7.5 2.90326 7.5 3.5V5.75C7.5 6.34674 7.26295 6.91903 6.84099 7.34099C6.41903 7.76295 5.84674 8 5.25 8H3C2.40326 8 1.83097 7.76295 1.40901 7.34099C0.987053 6.91903 0.75 6.34674 0.75 5.75V3.5ZM0.75 13.25C0.75 12.6533 0.987053 12.081 1.40901 11.659C1.83097 11.2371 2.40326 11 3 11H5.25C5.84674 11 6.41903 11.2371 6.84099 11.659C7.26295 12.081 7.5 12.6533 7.5 13.25V15.5C7.5 16.0967 7.26295 16.669 6.84099 17.091C6.41903 17.5129 5.84674 17.75 5.25 17.75H3C2.40326 17.75 1.83097 17.5129 1.40901 17.091C0.987053 16.669 0.75 16.0967 0.75 15.5V13.25ZM10.5 3.5C10.5 2.90326 10.7371 2.33097 11.159 1.90901C11.581 1.48705 12.1533 1.25 12.75 1.25H15C15.5967 1.25 16.169 1.48705 16.591 1.90901C17.0129 2.33097 17.25 2.90326 17.25 3.5V5.75C17.25 6.34674 17.0129 6.91903 16.591 7.34099C16.169 7.76295 15.5967 8 15 8H12.75C12.1533 8 11.581 7.76295 11.159 7.34099C10.7371 6.91903 10.5 6.34674 10.5 5.75V3.5ZM10.5 13.25C10.5 12.6533 10.7371 12.081 11.159 11.659C11.581 11.2371 12.1533 11 12.75 11H15C15.5967 11 16.169 11.2371 16.591 11.659C17.0129 12.081 17.25 12.6533 17.25 13.25V15.5C17.25 16.0967 17.0129 16.669 16.591 17.091C16.169 17.5129 15.5967 17.75 15 17.75H12.75C12.1533 17.75 11.581 17.5129 11.159 17.091C10.7371 16.669 10.5 16.0967 10.5 15.5V13.25Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`, label: "Dashboard", active: true, id: 1 },
-  { icon: `<svg width="22" height="18" viewBox="0 0 22 18" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-<path d="M5 17.25H17M9.5 14.25V17.25M12.5 14.25V17.25M2.375 14.25H19.625C20.246 14.25 20.75 13.746 20.75 13.125V1.875C20.75 1.254 20.246 0.75 19.625 0.75H2.375C1.754 0.75 1.25 1.254 1.25 1.875V13.125C1.25 13.746 1.754 14.25 2.375 14.25Z" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`, label: "AQM", id: 2 },
-  { icon: `<svg width="22" height="20" viewBox="0 0 22 20" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-<path d="M12.5001 19V11.5C12.5001 11.3011 12.5791 11.1103 12.7198 10.9697C12.8604 10.829 13.0512 10.75 13.2501 10.75H16.2501C16.449 10.75 16.6398 10.829 16.7804 10.9697C16.9211 11.1103 17.0001 11.3011 17.0001 11.5V19M12.5001 19H1.36011M12.5001 19H17.0001M17.0001 19H20.6401M19.2501 19V7.349M19.2501 7.349C18.6502 7.6951 17.949 7.82304 17.2656 7.71113C16.5821 7.59922 15.9583 7.25435 15.5001 6.735C14.9501 7.357 14.1461 7.75 13.2501 7.75C12.8244 7.75041 12.4035 7.66 12.0155 7.48479C11.6275 7.30959 11.2813 7.05363 11.0001 6.734C10.4501 7.357 9.64611 7.75 8.75011 7.75C8.32439 7.75041 7.90348 7.66 7.51548 7.48479C7.12748 7.30959 6.78132 7.05363 6.50011 6.734C6.04203 7.25351 5.41835 7.59858 4.73486 7.71067C4.05136 7.82276 3.35013 7.69498 2.75011 7.349M19.2501 7.349C19.6487 7.11891 19.989 6.80019 20.2447 6.41751C20.5004 6.03484 20.6646 5.59846 20.7247 5.14215C20.7847 4.68584 20.7389 4.22184 20.5909 3.78605C20.4429 3.35026 20.1966 2.95436 19.8711 2.629L18.6811 1.44C18.4001 1.15862 18.0188 1.00035 17.6211 1H4.37811C3.98057 1.00008 3.59931 1.15798 3.31811 1.439L2.12911 2.629C1.80435 2.95474 1.55873 3.3507 1.41118 3.78637C1.26364 4.22204 1.21811 4.68577 1.27811 5.14182C1.33811 5.59786 1.50204 6.03403 1.75725 6.41671C2.01246 6.79939 2.35215 7.11835 2.75011 7.349M2.75011 19V7.349M5.75011 16H9.50011C9.69902 16 9.88979 15.921 10.0304 15.7803C10.1711 15.6397 10.2501 15.4489 10.2501 15.25V11.5C10.2501 11.3011 10.1711 11.1103 10.0304 10.9697C9.88979 10.829 9.69902 10.75 9.50011 10.75H5.75011C5.5512 10.75 5.36043 10.829 5.21978 10.9697C5.07913 11.1103 5.00011 11.3011 5.00011 11.5V15.25C5.00011 15.664 5.33611 16 5.75011 16Z" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`, label: "PAV", id: 3 },
-  { icon: `<svg width="22" height="18" viewBox="0 0 22 18" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-<path d="M19.25 4.5L18.625 15.132C18.5913 15.705 18.3399 16.2436 17.9222 16.6373C17.5045 17.031 16.952 17.2502 16.378 17.25H5.622C5.04796 17.2502 4.49555 17.031 4.07783 16.6373C3.66011 16.2436 3.40868 15.705 3.375 15.132L2.75 4.5M9 8.25H13M2.375 4.5H19.625C20.246 4.5 20.75 3.996 20.75 3.375V1.875C20.75 1.254 20.246 0.75 19.625 0.75H2.375C1.754 0.75 1.25 1.254 1.25 1.875V3.375C1.25 3.996 1.754 4.5 2.375 4.5Z" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`, label: "Smart Feeding", id: 4 },
-
-  { icon: `<svg width="22" height="20" viewBox="0 0 22 20" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-<path d="M1.25 1H2.636C3.146 1 3.591 1.343 3.723 1.835L4.106 3.272M4.106 3.272C9.67664 3.11589 15.2419 3.73515 20.642 5.112C19.818 7.566 18.839 9.95 17.718 12.25H6.5M4.106 3.272L6.5 12.25M6.5 12.25C5.70435 12.25 4.94129 12.5661 4.37868 13.1287C3.81607 13.6913 3.5 14.4544 3.5 15.25H19.25M5 18.25C5 18.4489 4.92098 18.6397 4.78033 18.7803C4.63968 18.921 4.44891 19 4.25 19C4.05109 19 3.86032 18.921 3.71967 18.7803C3.57902 18.6397 3.5 18.4489 3.5 18.25C3.5 18.0511 3.57902 17.8603 3.71967 17.7197C3.86032 17.579 4.05109 17.5 4.25 17.5C4.44891 17.5 4.63968 17.579 4.78033 17.7197C4.92098 17.8603 5 18.0511 5 18.25ZM17.75 18.25C17.75 18.4489 17.671 18.6397 17.5303 18.7803C17.3897 18.921 17.1989 19 17 19C16.8011 19 16.6103 18.921 16.4697 18.7803C16.329 18.6397 16.25 18.4489 16.25 18.25C16.25 18.0511 16.329 17.8603 16.4697 17.7197C16.6103 17.579 16.8011 17.5 17 17.5C17.1989 17.5 17.3897 17.579 17.5303 17.7197C17.671 17.8603 17.75 18.0511 17.75 18.25Z" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-`, label: "Bird Transport", id: 5 },
-
-  { icon: `<svg width="22" height="20" viewBox="0 0 22 20" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-<path d="M1.25 1H2.636C3.146 1 3.591 1.343 3.723 1.835L4.106 3.272M4.106 3.272C9.67664 3.11589 15.2419 3.73515 20.642 5.112C19.818 7.566 18.839 9.95 17.718 12.25H6.5M4.106 3.272L6.5 12.25M6.5 12.25C5.70435 12.25 4.94129 12.5661 4.37868 13.1287C3.81607 13.6913 3.5 14.4544 3.5 15.25H19.25M5 18.25C5 18.4489 4.92098 18.6397 4.78033 18.7803C4.63968 18.921 4.44891 19 4.25 19C4.05109 19 3.86032 18.921 3.71967 18.7803C3.57902 18.6397 3.5 18.4489 3.5 18.25C3.5 18.0511 3.57902 17.8603 3.71967 17.7197C3.86032 17.579 4.05109 17.5 4.25 17.5C4.44891 17.5 4.63968 17.579 4.78033 17.7197C4.92098 17.8603 5 18.0511 5 18.25ZM17.75 18.25C17.75 18.4489 17.671 18.6397 17.5303 18.7803C17.3897 18.921 17.1989 19 17 19C16.8011 19 16.6103 18.921 16.4697 18.7803C16.329 18.6397 16.25 18.4489 16.25 18.25C16.25 18.0511 16.329 17.8603 16.4697 17.7197C16.6103 17.579 16.8011 17.5 17 17.5C17.1989 17.5 17.3897 17.579 17.5303 17.7197C17.671 17.8603 17.75 18.0511 17.75 18.25Z" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`, label: "Bird Transport", id: 6 },
-];
-
-const bottomItems = [
-  { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-<path d="M9.59396 3.94C9.68396 3.398 10.154 3 10.704 3H13.297C13.847 3 14.317 3.398 14.407 3.94L14.62 5.221C14.683 5.595 14.933 5.907 15.265 6.091C15.339 6.131 15.412 6.174 15.485 6.218C15.81 6.414 16.205 6.475 16.56 6.342L17.777 5.886C18.0264 5.79221 18.301 5.78998 18.5518 5.87971C18.8027 5.96945 19.0136 6.14531 19.147 6.376L20.443 8.623C20.576 8.8537 20.6229 9.12413 20.5753 9.38617C20.5277 9.6482 20.3887 9.88485 20.183 10.054L19.18 10.881C18.887 11.122 18.742 11.494 18.75 11.873C18.7514 11.958 18.7514 12.043 18.75 12.128C18.742 12.506 18.887 12.878 19.18 13.119L20.184 13.946C20.608 14.296 20.718 14.901 20.444 15.376L19.146 17.623C19.0128 17.8536 18.8022 18.0296 18.5515 18.1195C18.3008 18.2094 18.0263 18.2074 17.777 18.114L16.56 17.658C16.205 17.525 15.81 17.586 15.484 17.782C15.4115 17.8261 15.3381 17.8688 15.264 17.91C14.933 18.093 14.683 18.405 14.62 18.779L14.407 20.06C14.317 20.603 13.847 21 13.297 21H10.703C10.153 21 9.68396 20.602 9.59296 20.06L9.37996 18.779C9.31796 18.405 9.06796 18.093 8.73596 17.909C8.66181 17.8681 8.58846 17.8258 8.51596 17.782C8.19096 17.586 7.79596 17.525 7.43996 17.658L6.22296 18.114C5.97369 18.2075 5.69933 18.2096 5.44866 18.1199C5.19799 18.0302 4.98727 17.8545 4.85396 17.624L3.55696 15.377C3.4239 15.1463 3.37701 14.8759 3.42462 14.6138C3.47223 14.3518 3.61125 14.1152 3.81696 13.946L4.82096 13.119C5.11296 12.879 5.25796 12.506 5.25096 12.128C5.2494 12.043 5.2494 11.958 5.25096 11.873C5.25796 11.493 5.11296 11.122 4.82096 10.881L3.81696 10.054C3.6115 9.88489 3.47264 9.64843 3.42503 9.38662C3.37743 9.12481 3.42418 8.8546 3.55696 8.624L4.85396 6.377C4.98715 6.14614 5.19797 5.97006 5.44887 5.88014C5.69977 5.79021 5.97445 5.79229 6.22396 5.886L7.43996 6.342C7.79596 6.475 8.19096 6.414 8.51596 6.218C8.58796 6.174 8.66196 6.132 8.73596 6.09C9.06796 5.907 9.31796 5.595 9.37996 5.221L9.59396 3.94Z" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M15 12C15 12.7956 14.6839 13.5587 14.1213 14.1213C13.5587 14.6839 12.7956 15 12 15C11.2044 15 10.4413 14.6839 9.87868 14.1213C9.31607 13.5587 9 12.7956 9 12C9 11.2044 9.31607 10.4413 9.87868 9.87868C10.4413 9.31607 11.2044 9 12 9C12.7956 9 13.5587 9.31607 14.1213 9.87868C14.6839 10.4413 15 11.2044 15 12Z" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`, label: "Settings", active: false },
-  { icon: `<svg width="19" height="20" viewBox="0 0 19 20" fill="#fff" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.75 7V3.25C11.75 2.65326 11.5129 2.08097 11.091 1.65901C10.669 1.23705 10.0967 1 9.5 1H3.5C2.90326 1 2.33097 1.23705 1.90901 1.65901C1.48705 2.08097 1.25 2.65326 1.25 3.25V16.75C1.25 17.3467 1.48705 17.919 1.90901 18.341C2.33097 18.7629 2.90326 19 3.5 19H9.5C10.0967 19 10.669 18.7629 11.091 18.341C11.5129 17.919 11.75 17.3467 11.75 16.75V13M14.75 13L17.75 10M17.75 10L14.75 7M17.75 10H5" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`, label: "Logout" },
-]
 
 export function SideNavbar() {
   return (
     // <CHANGE> Made width responsive - narrow on mobile, full width on medium screens and up
-    <aside className="overflow-hidden w-16 md:w-64  bg-white text-[#0FC99F] flex flex-col">
+    <aside className="overflow-hidden w-16 md:w-64  bg-white  text-[#0FC99F] border-r border-r-[#D4D4D4] flex flex-col">
       {/* <CHANGE> Adjusted padding and made logo/text responsive */}
       <div className="p-3 md:p-6 h-[15%]">
         <div className="flex gap-3 items-center justify-center md:justify-start">
-          <Image src='/sare-logo.png' alt='sare-logo' width={40} height={40} className="h-8 w-8" />
+          <Image
+            src="/sare-logo.png"
+            alt="sare-logo"
+            width={40}
+            height={40}
+            className="h-8 w-8"
+          />
           {/* <CHANGE> Hide company name on mobile, show on medium screens and up */}
-          <span className="text-lg font-semibold self-end hidden md:block">SARE</span>
+          <span className="text-lg font-semibold self-end hidden md:block">
+            SARE
+          </span>
         </div>
       </div>
 
       {/* <CHANGE> Adjusted padding for mobile */}
-      <nav className="flex-1 relative  md:top-0 px-2 md:px-4 md:lh-[42.5%]  shadow-md">
+      <nav className="flex-1 relative  md:top-0 px-2 md:px-4 md:lh-[42.5%]  border-b border-[#D4D4D4]">
         <ul className="space-y-4">
-        {navigationItems.map(({ active, label, icon, id }) => (
-  <li key={id}>
-    <button
-      className={`w-full flex items-center gap-3 group px-2 md:px-3 py-2 rounded-[10px] text-sm transition-all duration-150 group justify-center md:justify-start ${
-        active
-          ? "bg-[#0ACA9F] font-extrabold text-white"
-          : "text-black hover:text-white group-hover:font-extrabold hover:bg-[#0ACA9F]"
-      }`}
-    >
-       <span
-                className="h-5 w-5 group-hover:text-white flex-shrink-0"
-                dangerouslySetInnerHTML={{ __html: icon }}
-              />
-      {/* <CHANGE> Hide labels on mobile, show on medium screens and up */}
-      <span className="hidden md:block">{label}</span>
-    </button>
-  </li>
-))}
+          {navigationItems.map(({ active, label, icon, id }) => (
+            <li key={id}>
+              <button
+                className={`w-full h-[45px] flex items-center gap-3 group px-2 md:px-3 py-2 rounded-[10px] text-sm transition-all duration-150 group justify-center md:justify-start cursor-pointer ${
+                  active
+                    ? "bg-[#0ACA9F] font-extrabold text-white"
+                    : "text-black hover:text-white group-hover:font-extrabold hover:bg-[#0ACA9F]"
+                }`}
+              >
+                <span
+                  className="h-5 w-5 group-hover:text-white flex-shrink-0"
+                  dangerouslySetInnerHTML={{ __html: icon }}
+                />
+                {/* <CHANGE> Hide labels on mobile, show on medium screens and up */}
+                <span className="hidden md:block">{label}</span>
+              </button>
+            </li>
+          ))}
         </ul>
       </nav>
- 
+
       {/* <CHANGE> Adjusted padding for mobile */}
-      <div className="p-2  md:p-4 border-t border-white shadow-md h-[35%]">
+      <div className="p-2  md:p-4  shadow-md h-[35%] ">
         <ul className="space-y-2">
           {bottomItems.map((item, index) => (
             <li key={index}>
               <button
-      className={`w-full flex items-center gap-3 group px-2 md:px-3 py-2 rounded-[10px] text-sm transition-all duration-150 group justify-center md:justify-start ${
-        item.active
-          ? "bg-[#0ACA9F] font-extrabold text-white"
-          : "text-black hover:text-white group-hover:font-extrabold hover:bg-[#0ACA9F]"
-      }`}
-    >
-                 <span
-                className="h-5 w-5 flex-shrink-0"
-                dangerouslySetInnerHTML={{ __html: item.icon }}
-              />
+                className={`w-full flex items-center gap-3 group px-2 md:px-3 py-2 rounded-[10px] text-sm transition-all duration-150 group justify-center md:justify-start ${
+                  item.active
+                    ? "bg-[#0ACA9F] font-extrabold text-white"
+                    : "text-black hover:text-white group-hover:font-extrabold hover:bg-[#0ACA9F]"
+                }`}
+              >
+                <span
+                  className="h-5 w-5 flex-shrink-0"
+                  dangerouslySetInnerHTML={{ __html: item.icon }}
+                />
                 {/* <CHANGE> Hide labels on mobile, show on medium screens and up */}
                 <span className="hidden md:block">{item.label}</span>
               </button>
@@ -95,5 +71,5 @@ export function SideNavbar() {
         </ul>
       </div>
     </aside>
-  )
+  );
 }

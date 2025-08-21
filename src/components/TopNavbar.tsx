@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import React, { useEffect, useState } from "react"
 import Image from "next/image"
@@ -41,7 +41,7 @@ export function TopNavbar() {
       <div className="flex items-center justify-between">
         {/* Greeting & Date */}
         <div className="text-left">
-          <h1 className="text-lg sm:text-xl font-semibold text-gray-900">
+          <h1 className="text-[24px] sm:text-xl font-medium text-black">
             Good {period}, David
           </h1>
           <p className="text-xs sm:text-sm text-gray-500">{date}</p>
@@ -50,7 +50,7 @@ export function TopNavbar() {
         {/* Actions */}
         <div className="flex items-center gap-3 sm:gap-4">
           {/* Chat Button - Always visible */}
-          <button className="p-2 hover:bg-gray-100 rounded-[6px] shadow-md transition-all duration-200">
+          <button className="p-2 hover:bg-gray-100 rounded-[6px] shadow-sm cursor-pointer ">
             <svg
               width="21"
               height="20"
@@ -69,7 +69,7 @@ export function TopNavbar() {
           </button>
 
           {/* Notification Button - Always visible */}
-          <button className="relative p-2 hover:bg-gray-100 rounded-[6px] shadow-md transition-all duration-200">
+          <button className="relative p-2 hover:bg-gray-100 rounded-[6px] shadow-sm cursor-pointer transition-all duration-200">
             <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.438 18.214C16.6797 17.9444 18.8823 17.4069 21 16.6127C19.2066 14.5942 18.2156 11.9705 18.2195 9.25129V8.33448C18.2195 6.38926 17.459 4.5237 16.1051 3.14822C14.7513 1.77274 12.9152 1 11.0006 1C9.08603 1 7.24987 1.77274 5.89606 3.14822C4.54225 4.5237 3.78169 6.38926 3.78169 8.33448V9.25129C3.78532 11.9707 2.79388 14.5944 1 16.6127C3.08506 17.395 5.28322 17.939 7.5632 18.214M14.438 18.214C12.1544 18.4892 9.84679 18.4892 7.5632 18.214M14.438 18.214C14.6114 18.7639 14.6545 19.3477 14.5638 19.9177C14.4732 20.4878 14.2513 21.028 13.9163 21.4945C13.5813 21.9609 13.1426 22.3404 12.6359 22.602C12.1293 22.8636 11.5689 23 11.0006 23C10.4323 23 9.87195 22.8636 9.36529 22.602C8.85862 22.3404 8.41993 21.9609 8.08491 21.4945C7.74989 21.028 7.52802 20.4878 7.43736 19.9177C7.3467 19.3477 7.38982 18.7639 7.5632 18.214" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -95,7 +95,7 @@ export function TopNavbar() {
               <h1 className="text-base font-medium truncate">
                 David Jeff
               </h1>
-              <span className="text-gray-500 text-sm font-medium truncate">
+              <span className="text-gray-500 text-[10px] font-medium truncate">
                 davidjeff@gmail.com
               </span>
             </div>
