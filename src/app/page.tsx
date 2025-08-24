@@ -5,9 +5,18 @@ import { AirHealthChart } from "@/components/airHealth/AirHealthChart";
 import { TopNavbar } from "@/components/TopNavbar";
 import { SideNavbar } from "@/components/Sidebar";
 import { OverviewCards } from "@/components/OverviewCards";
-import { ParameterChart } from "./../components/airHealth/ParameterChart";
+import { ParameterCard } from "@/components/airHealth/ParameterCard";
 
 export default function Dashboard() {
+  const parameterData = [
+    { name: "Air health", value: 90, },
+    { name: "CO2", value: 67, },
+    { name: "NH3", value: 20, },
+    { name: "TVOC", value: 50, },
+    { name: "Temperature", value: 22, },
+    { name: "Humidity", value: 60, },
+  ];
+
   return (
     <>
       {/* <div className=""></div> */}
@@ -23,8 +32,15 @@ export default function Dashboard() {
             </div>
             <OverviewCards />
           </main>
-          <div className="flex-1">
+          <div className="flex-1 flex flex-col gap-4">
             <AirHealthChart />
+            <div className="w-full h-max flex flex-wrap px-4 gap-4 md:justify-start justify-center">
+              {
+              parameterData.map((param, index) => (
+                <ParameterCard key={index} name={param.name} currentReading={param.value} />
+              ))
+            }
+            </div>
           </div>
         </div>
       </div>

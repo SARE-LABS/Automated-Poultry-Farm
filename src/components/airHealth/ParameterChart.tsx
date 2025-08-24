@@ -48,8 +48,8 @@ export const ParameterChart = ({ currentReading }: { currentReading: number }) =
 
     return (
         <RadialBarChart
-            width={200}
-            height={200}
+            width={180}
+            height={180}
             cx="50%"
             cy="50%"
             innerRadius="80%"
@@ -58,11 +58,12 @@ export const ParameterChart = ({ currentReading }: { currentReading: number }) =
             data={data}
             startAngle={270}
             endAngle={-90}
+            className="outline-0 focus:outline-none border-0"
         >
             {/* Hide axis ticks for clean look */}
             <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
             {/* Main radial bar with color-coded value */}
-            <RadialBar dataKey="value" background={{ fill: remainingColor }} />
+            <RadialBar dataKey="value" background={{ fill: remainingColor }} stroke="none"/>
 
             {/* Center label: shows percentage value */}
             <text

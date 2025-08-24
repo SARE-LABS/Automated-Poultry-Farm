@@ -39,9 +39,9 @@ export const ParameterCard = ({ name, currentReading }: ParameterCardProp) => {
     const remainingColor = getRemainingColor(mainColor);
 
     return (
-        <div className="flex flex-col p-4 bg-[#FFFFFF] border-2 border-[#0FC99F45] rounded-xl w-[319px] h-[330px] justify-between">
+        <div className="flex flex-col p-4 bg-[#FFFFFF] border-2 border-[#0FC99F45]  w-[280px] h-[300px] justify-between hover:shadow-md duration-200 rounded-[10px]">
             {/* Header: parameter name and info icon */}
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-4 ">
                 <span className="text-[18px] text-[#000000CC]">{name}</span>
                 {/* Info icon for additional details (optional) */}
                 <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
